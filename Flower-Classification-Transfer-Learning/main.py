@@ -100,6 +100,7 @@ def validation(model, validation_loader, criterion):
 
     for images, labels in iter(validation_loader):
 
+        model.eval()
         output = model.forward(images)
         probabilities = torch.exp(output) # because log max, need to take the exponential of results.
 
@@ -110,3 +111,49 @@ def validation(model, validation_loader, criterion):
 
 
 # training the custom classifier.
+
+def train_classifier(model, train_loader):
+
+    epochs=10
+    criterion = nn.NLLLoss()
+
+    for epoch in range(epochs):
+        for images,labels in iter(train_loader):
+            model.train()
+            output = model(images)
+            loss = criterion(output, labels)
+            loss.backward()
+            optimizer.step()
+
+    accuracy = validation(model, validation_loader=validate_loader, criterion=criterion)
+    print("Epoch: ", epoch, ", Accuracy: ", accuracy)
+
+
+# Testing the neural network.
+
+accuracy = 0
+
+for images, labels in iter(test_loader):
+    model.eval()
+    output = model.forward(images)
+    probabilities = torch.exp(output) # because log max, need to take the exponential of results.
+
+    equality = (labels.data == probabilities.max(dim=1)[1])
+    accuracy += equality.type(torch.FloatTensor).mean()
+
+print("Test Accuacy:", accuracy)
+
+# Saving model checkpoint
+
+model.class_to_idx = training_data.class_to_idx
+torch.save({
+    'arch': 'vgg16',
+    'class_to_idx': model.class_to_idx,
+    'model_state_dict': model.state_dict()
+}, 'checkpoint.pth')
+
+
+
+
+
+
