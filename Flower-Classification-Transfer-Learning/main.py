@@ -128,7 +128,7 @@ def train_classifier(model, train_loader):
     accuracy = validation(model, validation_loader=validate_loader, criterion=criterion)
     print("Epoch: ", epoch, ", Accuracy: ", accuracy)
 
-
+train_classifier(model, train_loader)
 # Testing the neural network.
 
 accuracy = 0
