@@ -7,7 +7,7 @@ import cv2
 import matplotlib.pyplot as plt
 from scipy import ndimage
 
-image = plt.imread('barrel-pics/2.14.png')
+image = plt.imread('/Users/aashirmeeran/Desktop/Machine-Learning/Image_Segementation/u-net-segmentation/barrel-pics/2.14.png')
 
 plt.imshow(image)
 

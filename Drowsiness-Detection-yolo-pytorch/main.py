@@ -1,9 +1,3 @@
-import torch
-import torchvision
-from matplotlib import pyplot as plt
-import numpy as np
-import cv2
-
 # Step 1: installing dependencies.
 
 # %%
@@ -13,6 +7,8 @@ import torchvision
 from matplotlib import pyplot as plt
 import numpy as np
 import cv2
+import uuid
+import time
 
 # Step 2: Loading the model
 
@@ -28,3 +24,5 @@ for label in labels:
     print("Getting the training images for {}".format(label))
     time.sleep(5)
 
+for label in labels:
+    print(label)
